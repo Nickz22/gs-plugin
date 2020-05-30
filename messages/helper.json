@@ -1,0 +1,6 @@
+{
+  "commandDescription": "data commands for your scratch org",
+  "objectFlagDescription": "Lead | lead | l | Contact | contact | c | ocr | opportunitycontactrole",
+  "operationFlagDescription": "insert | i | update | u | delete | d | bulk | b",
+  "errorNoDefaultOrgSet": "Please run sfdx force:config:set defaultusername=your_scratch_name"
+}
