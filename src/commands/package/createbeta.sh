@@ -55,7 +55,7 @@ create_beta_version(){
         sfdx force:package:install -p $parse_version_id -u qa@ringdnasequence.com -b 30 --noprompt -w 30
         exit 0
     else
-        echo "waiting for beta package upload...\n"
+        echo "waiting for beta package upload..."
     fi
     sleep ${interval}
     done
