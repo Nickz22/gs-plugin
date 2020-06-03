@@ -12,7 +12,7 @@ const messages = Messages.loadMessages("helper", "helper");
 
 export default class Data extends SfdxCommand {
 
-  // public static description = messages.getMessage('commandDescription');
+  public static description = messages.getMessage('dataCommandDescription');
 
   protected static flagsConfig = {
     operation: flags.string({
