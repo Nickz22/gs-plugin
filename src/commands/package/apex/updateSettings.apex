@@ -1,2 +1,0 @@
-insert new RDNACadence__RingDNAEnvironment__c(RDNACadence__Value__c='qa');
-insert new RDNACadence__SequenceSettings__c(RDNACadence__ApiKey__c='hQO+lf/Igj6v4oou2ynLCPs2yEA=',RDNACadence__ApiSecret__c='nQ5t3Agx9XfSzMDdzuivGiM8mGQytQnWudkgflS2XZc=');

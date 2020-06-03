@@ -23,7 +23,7 @@ export default class Data extends SfdxCommand {
   };
   public async run(): Promise<AnyJson> {
     const command =
-      "sfdx force:apex:execute -f helper/src/commands/helper/apex";
+      "sfdx force:apex:execute -f scrips/apex/data";
     switch (this.flags.object) {
       case "contact":
       case "c":
