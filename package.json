@@ -44,14 +44,13 @@
     "commands": "./lib/commands",
     "bin": "sfdx",
     "topics": {
-      "helper": {
-        "description": "Commands to manipulate data in your scratch org"
-      },
-      "package": {
-        "description": "Commands for package creation and installation"
-      },
       "gs": {
-        "description": "sfdx plugin for the Guided Selling team"
+        "package": {
+          "description": "Commands for package creation and installation"
+        },
+        "helper": {
+          "description": "Commands to manipulate data in your scratch org"
+        }
       }  
     },
     "devPlugins": [
