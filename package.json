@@ -52,7 +52,10 @@
       },
       "package": {
         "description": "Commands for package creation and installation"
-      }    
+      },
+      "gs": {
+        "description": "sfdx plugin for the Guided Selling team"
+      }  
     },
     "devPlugins": [
       "@oclif/plugin-help"
