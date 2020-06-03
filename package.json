@@ -44,9 +44,6 @@
     "commands": "./lib/commands",
     "bin": "sfdx",
     "topics": {
-      "hello": {
-        "description": "Commands to say hello."
-      },
       "helper": {
         "description": "Commands to manipulate data in your scratch org"
       },

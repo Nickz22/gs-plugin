@@ -1,5 +1,5 @@
 {
-  "commandDescription": "data commands for your scratch org \n executes your local scripts/apex/data files",
+  "commandDescription": "\ndata commands for your scratch org \n executes your local scripts/apex/data files",
   "objectFlagDescription": "Lead | lead | l \n Contact | contact | c \n ocr | opportunitycontactrole",
   "operationFlagDescription": "insert | i \n update | u \n delete | d \n bulk | b",
   "errorNoDefaultOrgSet": "Please run sfdx force:config:set defaultusername=your_scratch_name"
