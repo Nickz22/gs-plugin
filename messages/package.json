@@ -1,4 +1,5 @@
 {
-  "betaCommandDescription": "commands for beta package upload and installation into QA env",
+  "betaCommandDescription": "command for beta package upload and installation into QA env",
+  "commandDescription" : "commands for packaging operations",
   "packagingOrgDescription": "alias of the Guided Selling packaging org"
 }
