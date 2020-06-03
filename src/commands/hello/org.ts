@@ -7,7 +7,7 @@ Messages.importMessagesDirectory(__dirname);
 
 // Load the specific messages for this file. Messages from @salesforce/command, @salesforce/core,
 // or any library that is using the messages framework can also be loaded this way.
-const messages = Messages.loadMessages('gs-plugin', 'org');
+const messages = Messages.loadMessages('helper', 'org');
 
 export default class Org extends SfdxCommand {
 

@@ -1,8 +1,8 @@
 {
-  "name": "gs-plugin",
+  "name": "helper",
   "version": "0.0.0",
   "author": "Nick Zozaya @Nickz22",
-  "bugs": "https://github.com/Nickz22/gs-plugin/issues",
+  "bugs": "https://github.com/Nickz22/helper/issues",
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
@@ -35,7 +35,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/Nickz22/gs-plugin",
+  "homepage": "https://github.com/Nickz22/helper",
   "keywords": [
     "sfdx-plugin"
   ],
@@ -52,7 +52,7 @@
       "@oclif/plugin-help"
     ]
   },
-  "repository": "Nickz22/gs-plugin",
+  "repository": "Nickz22/helper",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "tslint -p test -t stylish",

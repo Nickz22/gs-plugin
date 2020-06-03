@@ -1,28 +1,29 @@
 import { flags, SfdxCommand } from "@salesforce/command";
 import { Messages } from "@salesforce/core";
 import { AnyJson } from "@salesforce/ts-types";
-const { exec } = require("child_process");
+import { doAction } from "../../Util/Util";
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
 
 // Load the specific messages for this file. Messages from @salesforce/command, @salesforce/core,
 // or any library that is using the messages framework can also be loaded this way.
-const messages = Messages.loadMessages("gs-plugin", "helper");
+const messages = Messages.loadMessages("helper", "helper");
 
 export default class Data extends SfdxCommand {
   protected static flagsConfig = {
     operation: flags.string({
       char: "o",
-      description: messages.getMessage("operationFlagDescription"),
+      description: messages.getMessage("operationFlagDescription")
     }),
     object: flags.string({
       char: "n",
-      description: messages.getMessage("objectFlagDescription"),
-    }),
+      description: messages.getMessage("objectFlagDescription")
+    })
   };
   public async run(): Promise<AnyJson> {
-    const command = "sfdx force:apex:execute -f src/commands/helper/apex";
+    const command =
+      "sfdx force:apex:execute -f helper/src/commands/helper/apex";
     switch (this.flags.object) {
       case "contact":
       case "c":
@@ -72,7 +73,10 @@ export default class Data extends SfdxCommand {
           break;
         case "b":
         case "bulk":
-          doAction(`${command}/bulkTestLead.apex`);
+          for (let i = 0; i < 4; i++) {
+            // separate transactions to avoid cpu time issues
+            doAction(`${command}/bulkTestLead.apex`);
+          }
           break;
       }
     }
@@ -94,19 +98,6 @@ export default class Data extends SfdxCommand {
         case "bulk":
           console.log("no bulk action available for OpportunityContactRole");
       }
-    }
-
-    function doAction(command: string) {
-      exec(command, (err, stdout, stderr) => {
-        if (stdout) console.log("RESPONSE \n " + stdout);
-        if (stderr) {
-          if (stderr.includes("OAuth")) {
-            console.log(
-              "Please run sfdx force:config:set defaultusername=your_alias"
-            );
-          } else console.log("ERROR \n" + stderr);
-        }
-      });
     }
     return "done";
   }

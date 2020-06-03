@@ -1,16 +1,16 @@
-gs-plugin
-=========
+helper
+======
 
 
 
-[![Version](https://img.shields.io/npm/v/gs-plugin.svg)](https://npmjs.org/package/gs-plugin)
-[![CircleCI](https://circleci.com/gh/Nickz22/gs-plugin/tree/master.svg?style=shield)](https://circleci.com/gh/Nickz22/gs-plugin/tree/master)
-[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/Nickz22/gs-plugin?branch=master&svg=true)](https://ci.appveyor.com/project/heroku/gs-plugin/branch/master)
-[![Codecov](https://codecov.io/gh/Nickz22/gs-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/Nickz22/gs-plugin)
-[![Greenkeeper](https://badges.greenkeeper.io/Nickz22/gs-plugin.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/Nickz22/gs-plugin/badge.svg)](https://snyk.io/test/github/Nickz22/gs-plugin)
-[![Downloads/week](https://img.shields.io/npm/dw/gs-plugin.svg)](https://npmjs.org/package/gs-plugin)
-[![License](https://img.shields.io/npm/l/gs-plugin.svg)](https://github.com/Nickz22/gs-plugin/blob/master/package.json)
+[![Version](https://img.shields.io/npm/v/helper.svg)](https://npmjs.org/package/helper)
+[![CircleCI](https://circleci.com/gh/Nickz22/helper/tree/master.svg?style=shield)](https://circleci.com/gh/Nickz22/helper/tree/master)
+[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/Nickz22/helper?branch=master&svg=true)](https://ci.appveyor.com/project/heroku/helper/branch/master)
+[![Codecov](https://codecov.io/gh/Nickz22/helper/branch/master/graph/badge.svg)](https://codecov.io/gh/Nickz22/helper)
+[![Greenkeeper](https://badges.greenkeeper.io/Nickz22/helper.svg)](https://greenkeeper.io/)
+[![Known Vulnerabilities](https://snyk.io/test/github/Nickz22/helper/badge.svg)](https://snyk.io/test/github/Nickz22/helper)
+[![Downloads/week](https://img.shields.io/npm/dw/helper.svg)](https://npmjs.org/package/helper)
+[![License](https://img.shields.io/npm/l/helper.svg)](https://github.com/Nickz22/helper/blob/master/package.json)
 
 <!-- toc -->
 * [Debugging your plugin](#debugging-your-plugin)
@@ -18,11 +18,11 @@ gs-plugin
 <!-- install -->
 <!-- usage -->
 ```sh-session
-$ npm install -g gs-plugin
+$ npm install -g helper
 $ sfdx COMMAND
 running command...
 $ sfdx (-v|--version|version)
-gs-plugin/0.0.0 darwin-x64 node-v12.16.3
+helper/0.0.0 darwin-x64 node-v12.16.3
 $ sfdx --help [COMMAND]
 USAGE
   $ sfdx COMMAND
