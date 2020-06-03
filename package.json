@@ -44,14 +44,12 @@
     "commands": "./lib/commands",
     "bin": "sfdx",
     "topics": {
-      "gs": {
-        "package": {
+      "gs:package": {
           "description": "Commands for package creation and installation"
         },
-        "helper": {
+        "gs:helper": {
           "description": "Commands to manipulate data in your scratch org"
         }
-      }  
     },
     "devPlugins": [
       "@oclif/plugin-help"
