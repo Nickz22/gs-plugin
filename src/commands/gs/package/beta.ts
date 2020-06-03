@@ -11,7 +11,7 @@ Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages("helper", "package"); 
 
 export default class Beta extends SfdxCommand {
-  public static description = messages.getMessage('betaCommandDescription');
+  public static description = messages.getMessage('commandDescription');
 
   protected static flagsConfig = {
     alias: flags.string({
