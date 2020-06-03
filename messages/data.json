@@ -1,0 +1,5 @@
+{
+    "commandDescription": "executes your local scripts/apex/data files - to change behavior, revise local scripts/apex/data files.",
+    "objectFlagDescription": "Lead | lead | l \n Contact | contact | c \n ocr | opportunitycontactrole",
+    "operationFlagDescription": "insert | i \n update | u \n delete | d \n bulk | b"
+}
