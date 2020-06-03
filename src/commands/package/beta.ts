@@ -23,7 +23,7 @@ export default class Beta extends SfdxCommand {
       return;
     }
     
-    const command : string = `bash helper/src/commands/package/createbeta.sh ${this.flags.alias}`
+    const command : string = `bash src/commands/package/createbeta.sh ${this.flags.alias}`
     doAction(command);
     return "done";
   }

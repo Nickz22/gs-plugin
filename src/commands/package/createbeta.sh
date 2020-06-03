@@ -61,13 +61,13 @@ create_beta_version(){
     done
 }
 create_test_data(){
-    sfdx force:apex:execute -f helper/src/commands/package/apex/createTemplate.apex -u qa@ringdnasequence.com
-    sfdx force:apex:execute -f helper/src/commands/package/apex/createActions.apex -u qa@ringdnasequence.com
-    sfdx force:apex:execute -f helper/src/commands/package/apex/createSequence.apex -u qa@ringdnasequence.com
-    sfdx force:apex:execute -f helper/src/commands/package/apex/createCampaignSequence.apex -u qa@ringdnasequence.com
-    sfdx force:apex:execute -f helper/src/commands/package/apex/createManualSequence.apex -u qa@ringdnasequence.com
-    sfdx force:apex:execute -f helper/src/commands/package/apex/createCadenceActions.apex -u qa@ringdnasequence.com
-    sfdx force:apex:execute -f helper/src/commands/package/apex/updateSettings.apex -u qa@ringdnasequence.com
+    sfdx force:apex:execute -f src/commands/package/apex/createTemplate.apex -u qa@ringdnasequence.com
+    sfdx force:apex:execute -f src/commands/package/apex/createActions.apex -u qa@ringdnasequence.com
+    sfdx force:apex:execute -f src/commands/package/apex/createSequence.apex -u qa@ringdnasequence.com
+    sfdx force:apex:execute -f src/commands/package/apex/createCampaignSequence.apex -u qa@ringdnasequence.com
+    sfdx force:apex:execute -f src/commands/package/apex/createManualSequence.apex -u qa@ringdnasequence.com
+    sfdx force:apex:execute -f src/commands/package/apex/createCadenceActions.apex -u qa@ringdnasequence.com
+    sfdx force:apex:execute -f src/commands/package/apex/updateSettings.apex -u qa@ringdnasequence.com
 }
 
 create_beta_package
