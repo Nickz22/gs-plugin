@@ -1,14 +1,14 @@
 import { flags, SfdxCommand } from "@salesforce/command";
 import { Messages } from "@salesforce/core";
 import { AnyJson } from "@salesforce/ts-types";
-import { doAction } from "../../../Util/Util";
+import { doAction } from "../../../../Util/Util";
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
 
 // Load the specific messages for this file. Messages from @salesforce/command, @salesforce/core,
 // or any library that is using the messages framework can also be loaded this way.
-const messages = Messages.loadMessages("helper", "package"); 
+const messages = Messages.loadMessages("helper", "beta"); 
 
 export default class Beta extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
