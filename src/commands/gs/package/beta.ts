@@ -27,24 +27,29 @@ export default class Beta extends SfdxCommand {
 
     const inputValidation = async () => {
       console.log('validating input ts');
-      const validateCommand : string = `bash scripts/bash/validate.sh ${this.flags.alias}`
+      const validateCommand : string = `bash scripts/bash/validate.sh ${this.flags.alias}`;
       if( !doAction(validateCommand) ) 
         return; 
     }
-    await inputValidation();
-    const authCommand : string = `bash scripts/bash/auth.sh`
-    if( !doAction(authCommand) ) return;
-    const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
-    
-    let deployResult = doAction(deployCommand);
-    console.log('deployResult ==> '+deployResult);
-    if( !deployResult ){
-      return;
-    }else{
-      console.log('deploy was success...');
+    const authorize = async () => {
+      const authCommand : string = `bash scripts/bash/auth.sh`;
+      if( !doAction(authCommand) ) 
+        return;
     }
-    const betaCommand : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}`
-    if( !doAction(betaCommand) ) return;
+    const deployToPackagingOrg = async() => {
+      const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
+      let deployResult = doAction(deployCommand);
+      console.log('deployResult ==> '+deployResult);
+    }
+    const createBetaPackage = async() => {
+      const betaCommand : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}`
+      if( !doAction(betaCommand) ) 
+        return;
+    }
+    await inputValidation();
+    await authorize();
+    await deployToPackagingOrg();
+    await createBetaPackage();
     return "done";
   }
   
