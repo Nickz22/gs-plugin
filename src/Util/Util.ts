@@ -4,11 +4,7 @@ export function doAction(command: string): boolean {
   let success : boolean = true;
   exec(command, (err, stdout, stderr) => {
     if (stdout){ 
-      
       console.log(stdout);
-      console.log('standard output');
-      console.log('standard output');
-      console.log('standard output');
     }
     if (stderr) {
       console.log('error');

@@ -29,7 +29,10 @@ export default class Beta extends SfdxCommand {
     const authCommand : string = `bash scripts/bash/auth.sh`
     if( !doAction(authCommand) ) return;
     const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
-    if( !doAction(deployCommand) ){
+    
+    let deployResult = doAction(deployCommand);
+    console.log('deployResult ==> '+deployResult);
+    if( !deployResult ){
       return;
     }else{
       console.log('deploy was success...');
