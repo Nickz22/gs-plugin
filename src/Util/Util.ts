@@ -3,7 +3,8 @@ const { exec } = require("child_process");
 export async function doAction(command: string, callback: any) {
   let success : boolean = true;
   await exec(command, (err, stdout, stderr) => {
-    if (stdout){ 
+    if (stdout){
+      console.log('stdout!!'); 
       console.log(stdout);
       callback();
     }
