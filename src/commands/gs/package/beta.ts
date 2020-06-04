@@ -28,32 +28,26 @@ export default class Beta extends SfdxCommand {
     const inputValidation = () => {
       console.log('validating input ts');
       const validateCommand : string = `bash scripts/bash/validate.sh ${this.flags.alias}`;
-      if( !doAction(validateCommand) ) 
-        return; 
+      doAction(validateCommand, authorize)
     }
     const authorize = () => {
       console.log('authorizing');
-      const authCommand : string = `bash scripts/bash/auth.sh`;
-      if( !doAction(authCommand) ) 
-        return;
+      const authCommand : string = `bash scripts/bash/auth.sh`; 
+      doAction(authCommand, deployToPackagingOrg);
     }
     const deployToPackagingOrg = () => {
       console.log('deploying');
       const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
-      let deployResult = doAction(deployCommand);
-      console.log('deployResult ==> '+deployResult);
+      doAction(deployCommand, createBetaPackage);
     }
     const createBetaPackage = () => {
       console.log('creating beta');
       const betaCommand : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}`
-      if( !doAction(betaCommand) ) 
-        return;
+      doAction(betaCommand, () => {return "done";});
     }
-    await inputValidation();
-    await authorize();
-    await deployToPackagingOrg();
-    await createBetaPackage();
-    return "done";
+
+    inputValidation();
+    // return "done";
   }
   
 }
