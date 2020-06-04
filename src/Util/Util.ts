@@ -1,4 +1,4 @@
-const { execFile } = require("child_process");
+const { exec } = require("child_process");
 
 export function doAction(command: string) {
   /**
@@ -7,7 +7,8 @@ export function doAction(command: string) {
   let mockPoller = setInterval(() => {  
     console.log('spinning up new beta package...');
   }, 3000);
-  execFile(command, (err, stdout, stderr) => {
+  console.log('utils');
+  exec(command, (err, stdout, stderr) => {
     if (stdout) console.log("RESPONSE \n " + stdout);
     if (stderr) {
       if (stderr.includes("OAuth")) {
