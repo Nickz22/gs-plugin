@@ -1,4 +1,4 @@
-const { execFile } = require("child_process");
+const { execSync } = require("child_process");
 
 export function doAction(command: string) {
   /**
@@ -8,7 +8,7 @@ export function doAction(command: string) {
     // console.log('spinning up new beta package...');
   }, 3000);
   console.log('utils');
-  execFile(command, (err, stdout, stderr) => {
+  execSync(command, (err, stdout, stderr) => {
     if (stdout) console.log("RESPONSE \n " + stdout);
     if (stderr) {
       if (stderr.includes("OAuth")) {
