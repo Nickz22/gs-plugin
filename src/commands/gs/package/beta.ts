@@ -42,8 +42,14 @@ export default class Beta extends SfdxCommand {
     const createBetaPackage = () => {
       console.log('creating new package version...');
       const betaCommand : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}`
-      doAction(betaCommand, () => {return "done"});
+      doAction(betaCommand, createTestData());
+    }
+    const createTestData = () => {
+      console.log('creating QA test data...');
+      const initDataCommand : string = `bash scripts/bash/createTestData.sh`;
+      doAction(initDataCommand, () => {return});
     }
     inputValidation();
+    return "done";
   }
 }
