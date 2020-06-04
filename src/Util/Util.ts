@@ -7,7 +7,6 @@ export function doAction(command: string) {
   let mockPoller = setInterval(() => {  
     console.log('spinning up new beta package...');
   }, 15000);
-  console.log('utils');
   exec(command, (err, stdout, stderr) => {
     if (stdout) console.log("RESPONSE \n " + stdout);
     if (stderr) {

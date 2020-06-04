@@ -24,9 +24,12 @@ export default class Beta extends SfdxCommand {
       console.log("please provide the packaging org alias in the -u parameter");
       return;
     }
+    const validateCommand : string = `bash scripts/bash/validate.sh ${this.flags.alias}`
+    doAction(validateCommand);
+
     // local path to executable bash scripts
-    const command : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}` 
-    doAction(command);
+    const betaCommand : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}`
+    doAction(betaCommand);
     return "done";
   }
 }
