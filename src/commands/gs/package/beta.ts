@@ -32,16 +32,19 @@ export default class Beta extends SfdxCommand {
         return; 
     }
     const authorize = async () => {
+      console.log('authorizing');
       const authCommand : string = `bash scripts/bash/auth.sh`;
       if( !doAction(authCommand) ) 
         return;
     }
     const deployToPackagingOrg = async() => {
+      console.log('deploying');
       const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
       let deployResult = doAction(deployCommand);
       console.log('deployResult ==> '+deployResult);
     }
     const createBetaPackage = async() => {
+      console.log('creating beta');
       const betaCommand : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}`
       if( !doAction(betaCommand) ) 
         return;
