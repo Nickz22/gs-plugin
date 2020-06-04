@@ -4,7 +4,6 @@ export async function doAction(command: string, callback: any) {
   let success : boolean = true;
   await exec(command, (err, stdout, stderr) => {
     if (stderr) {
-      console.log('error');
       success = false;
       if (stderr.includes("OAuth")) {
         console.log(
@@ -19,7 +18,6 @@ export async function doAction(command: string, callback: any) {
                           // in error outcomes
     }
     if (stdout){
-      console.log('stdout!!'); 
       console.log(stdout);
       callback();
     }
