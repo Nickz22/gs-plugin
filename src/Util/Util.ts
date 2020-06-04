@@ -1,12 +1,12 @@
 const { exec } = require("child_process");
 
-export function doAction(command: string) {
-  /**
-   * need to remove this from util since its only relevant to beta packaging
-   */
+export function doAction(command: string): boolean {
+  let success : boolean = true;
+
   exec(command, (err, stdout, stderr) => {
     if (stdout) console.log(stdout);
     if (stderr) {
+      success = false;
       if (stderr.includes("OAuth")) {
         console.log(
           "Please run sfdx force:config:set defaultusername=your_alias"
@@ -17,4 +17,5 @@ export function doAction(command: string) {
       }else console.log(stderr);
     }
   });
+  return success;
 }

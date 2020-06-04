@@ -25,15 +25,14 @@ export default class Beta extends SfdxCommand {
       return;
     }
     const validateCommand : string = `bash scripts/bash/validate.sh ${this.flags.alias}`
-    doAction(validateCommand);
+    if( !doAction(validateCommand) ) return;
     const authCommand : string = `bash scripts/bash/auth.sh`
-    doAction(authCommand);
+    if( !doAction(authCommand) ) return;
     const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
-    doAction(deployCommand);
-
+    if( !doAction(deployCommand) ) return;
     // local path to executable bash scripts
     const betaCommand : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}`
-    doAction(betaCommand);
+    if( !doAction(betaCommand) ) return;
     return "done";
   }
 }
