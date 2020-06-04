@@ -1,4 +1,4 @@
-const { fork } = require("child_process");
+const { exec } = require("child_process");
 
 export function doAction(command: string) {
   /**
@@ -8,7 +8,7 @@ export function doAction(command: string) {
     // console.log('spinning up new beta package...');
   }, 3000);
   console.log('utils');
-  fork(command, (err, stdout, stderr) => {
+  exec(command, (err, stdout, stderr) => {
     if (stdout) console.log("RESPONSE \n " + stdout);
     if (stderr) {
       if (stderr.includes("OAuth")) {
