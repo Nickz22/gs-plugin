@@ -25,13 +25,13 @@ export default class Beta extends SfdxCommand {
       return;
     }
 
-    const inputValidation = () => {
+    const inputValidation = async () => {
       console.log('validating input ts');
       const validateCommand : string = `bash scripts/bash/validate.sh ${this.flags.alias}`
       if( !doAction(validateCommand) ) 
         return; 
     }
-    inputValidation();
+    await inputValidation();
     const authCommand : string = `bash scripts/bash/auth.sh`
     if( !doAction(authCommand) ) return;
     const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
