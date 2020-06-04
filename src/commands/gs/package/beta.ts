@@ -1,7 +1,7 @@
 import { flags, SfdxCommand } from "@salesforce/command";
 import { Messages } from "@salesforce/core";
 import { AnyJson } from "@salesforce/ts-types";
-import { doAction } from "../../../Util/Util";
+import { doActionWithCallback } from "../../../Util/Util";
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
@@ -27,27 +27,27 @@ export default class Beta extends SfdxCommand {
         return;
       }
       const validateCommand : string = `bash scripts/bash/validate.sh ${this.flags.alias}`;
-      doAction(validateCommand, authorize)
+      doActionWithCallback(validateCommand, authorize)
     }
     const authorize = () => {
       console.log('authorizing...');
       const authCommand : string = `bash scripts/bash/auth.sh`; 
-      doAction(authCommand, deployToPackagingOrg);
+      doActionWithCallback(authCommand, deployToPackagingOrg);
     }
     const deployToPackagingOrg = () => {
       console.log('deploying to packaging org...');
       const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
-      doAction(deployCommand, createBetaPackage);
+      doActionWithCallback(deployCommand, createBetaPackage);
     }
     const createBetaPackage = () => {
       console.log('creating new package version...');
       const betaCommand : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}`
-      doAction(betaCommand, createTestData());
+      doActionWithCallback(betaCommand, createTestData());
     }
     const createTestData = () => {
       console.log('creating QA test data...');
       const initDataCommand : string = `bash scripts/bash/createTestData.sh`;
-      doAction(initDataCommand, () => {return});
+      doActionWithCallback(initDataCommand, () => {return});
     }
     inputValidation();
     return "done";
