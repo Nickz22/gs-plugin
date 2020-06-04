@@ -28,7 +28,7 @@ export default class Beta extends SfdxCommand {
     doAction(validateCommand);
     const authCommand : string = `bash scripts/bash/auth.sh`
     doAction(authCommand);
-    const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh`
+    const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
     doAction(deployCommand);
 
     // local path to executable bash scripts
