@@ -30,7 +30,6 @@ export default class Beta extends SfdxCommand {
     if( !doAction(authCommand) ) return;
     const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
     if( !doAction(deployCommand) ) return;
-    // local path to executable bash scripts
     const betaCommand : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}`
     if( !doAction(betaCommand) ) return;
     return "done";

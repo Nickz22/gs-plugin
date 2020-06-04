@@ -6,6 +6,7 @@ export function doAction(command: string): boolean {
   exec(command, (err, stdout, stderr) => {
     if (stdout) console.log(stdout);
     if (stderr) {
+      console.log('error');
       success = false;
       if (stderr.includes("OAuth")) {
         console.log(
