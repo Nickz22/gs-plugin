@@ -26,7 +26,7 @@ export default class Beta extends SfdxCommand {
     }
     // local path to executable bash scripts
     // const command : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}` 
-    const command : string = `bash scripts/bash/test.sh` 
+    const command : string = `bash scripts/bash/createbeta.sh` 
     doAction(command);
     return "done";
   }
