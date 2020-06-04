@@ -3,11 +3,6 @@ const { exec } = require("child_process");
 export async function doAction(command: string, callback: any) {
   let success : boolean = true;
   await exec(command, (err, stdout, stderr) => {
-    if (stdout){
-      console.log('stdout!!'); 
-      console.log(stdout);
-      callback();
-    }
     if (stderr) {
       console.log('error');
       success = false;
@@ -19,6 +14,14 @@ export async function doAction(command: string, callback: any) {
         console.log(stderr);
         console.log('HINT: Please cd into the "src" dir of the git repo before using plugin');
       }else console.log(stderr);
+      return success; // need to return because 
+                        // std out is being run 
+                          // in error outcomes
+    }
+    if (stdout){
+      console.log('stdout!!'); 
+      console.log(stdout);
+      callback();
     }
   });
   return success;
