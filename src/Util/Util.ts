@@ -8,16 +8,16 @@ export function doAction(command: string) {
     console.log('spinning up new beta package...');
   }, 15000);
   exec(command, (err, stdout, stderr) => {
-    if (stdout) console.log("RESPONSE \n " + stdout);
+    if (stdout) console.log(stdout);
     if (stderr) {
       if (stderr.includes("OAuth")) {
         console.log(
           "Please run sfdx force:config:set defaultusername=your_alias"
         );
       }else if(stderr.includes('No such file')){
-        console.log('ERROR: '+stderr);
+        console.log(stderr);
         console.log('HINT: Please cd into the "src" dir of the git repo before using plugin');
-      }else console.log("ERROR: \n" + stderr);
+      }else console.log(stderr);
     }
     clearInterval(mockPoller);
   });
