@@ -24,8 +24,14 @@ export default class Beta extends SfdxCommand {
       console.log("please provide the packaging org alias in the -u parameter");
       return;
     }
-    const validateCommand : string = `bash scripts/bash/validate.sh ${this.flags.alias}`
-    if( !doAction(validateCommand) ) return;
+
+    const inputValidation = () => {
+      console.log('validating input ts');
+      const validateCommand : string = `bash scripts/bash/validate.sh ${this.flags.alias}`
+      if( !doAction(validateCommand) ) 
+        return; 
+    }
+    inputValidation();
     const authCommand : string = `bash scripts/bash/auth.sh`
     if( !doAction(authCommand) ) return;
     const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
@@ -41,4 +47,5 @@ export default class Beta extends SfdxCommand {
     if( !doAction(betaCommand) ) return;
     return "done";
   }
+  
 }
