@@ -1,7 +1,7 @@
 import { flags, SfdxCommand } from "@salesforce/command";
 import { Messages } from "@salesforce/core";
 import { AnyJson } from "@salesforce/ts-types";
-import { doActionWithCallback } from "../../../Util/Util";
+import { doActionWithCallback, doPackageUpload, doPackageInstall, log } from "../../../Util/Util";
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
@@ -13,42 +13,40 @@ const messages = Messages.loadMessages("helper", "beta");
 export default class Beta extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
+  commands = {
+    validate: 'bash scripts/bash/validate.sh',
+    version: 'bash scripts/bash/createbeta.sh',
+    install: 'bash scripts/bash/qaInstall.sh',
+    initdata: 'bash scripts/bash/createTestData.sh'
+  };
+
   protected static flagsConfig = {
     alias: flags.string({
       char: "u",
-      description: messages.getMessage("packagingOrgDescription") // not sure how to use the messages object yet...
+      description: messages.getMessage("packagingOrgDescription")
     })
   };
   public async run(): Promise<AnyJson> {
-
     const inputValidation = () => {
       if( this.flags.alias == undefined ){
-        console.log("please provide the packaging org alias in the -u parameter");
+        log(messages.getMessage("validationMessage"));
         return;
       }
-      const validateCommand : string = `bash scripts/bash/validate.sh ${this.flags.alias}`;
-      doActionWithCallback(validateCommand, authorize)
+      doActionWithCallback(`${this.commands.validate} ${this.flags.alias}`, createBetaVersion)
     }
-    const authorize = () => {
-      console.log('authorizing...');
-      const authCommand : string = `bash scripts/bash/auth.sh`; 
-      doActionWithCallback(authCommand, deployToPackagingOrg);
+    const createBetaVersion = () => {
+      log(messages.getMessage("beginNewVersion"));
+      doPackageUpload(`${this.commands.version} ${this.flags.alias}`, installInQa);
     }
-    const deployToPackagingOrg = () => {
-      console.log('deploying to packaging org...');
-      const deployCommand : string = `bash scripts/bash/deployToPkgOrg.sh ${this.flags.alias}`
-      doActionWithCallback(deployCommand, createBetaPackage);
-    }
-    const createBetaPackage = () => {
-      console.log('creating new package version...');
-      const betaCommand : string = `bash scripts/bash/createbeta.sh ${this.flags.alias}`
-      doActionWithCallback(betaCommand, createTestData());
+    const installInQa = (versionId : string) => {
+      log(messages.getMessage("installNewVersion"));
+      doPackageInstall(`${this.commands.install} ${versionId}`, createTestData);
     }
     const createTestData = () => {
-      console.log('creating QA test data...');
-      const initDataCommand : string = `bash scripts/bash/createTestData.sh`;
-      doActionWithCallback(initDataCommand, () => {return});
+      log(messages.getMessage("createTestData"));
+      doActionWithCallback(this.commands.initdata, () => {return});
     }
+
     inputValidation();
     return "done";
   }
