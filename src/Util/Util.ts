@@ -1,76 +1,84 @@
 const { exec } = require("child_process");
+const genericError : string = 'oops, looks like an error occurred while';
+const messages = {
+  packagingError : `${genericError} creating a new package version`,
+  installError : `${genericError} installing the new version in QA`,
+  packageIdPhrase : '__PACKAGEID__',
+  successNewVersion : 'successfully uploaded new package version...',
+  installingNewVersion : 'installing new version in QA ==> ',
+  successInstall : 'successfully installed beta package in QA...',
+  betaUpgradeError : 'You cannot upgrade a beta package',
+  betaUpgradeHint : 'Please uninstall Sequence QA package and try again'
+}
 
 export async function doActionWithCallback(command: string, callback: any) {
   let success : boolean = true;
   await exec(command, (err, stdout, stderr) => {
     if (err){
       success = false;
-      console.log("ERROR");
+      log("ERROR");
       return success;
     }
     if (stdout){
       if(stdout != null && stdout.length > 0){
-        console.log(stdout);
+        log(stdout);
         callback();
       }else{
-        console.log('empty std out...');  
+        log('empty std out...');  
       }
     }
   });
   return success;
 }
 
-export function doPackageUpload(command: string, callback: any){
+export function createNewVersion(command: string, callback: any){
   exec(command, (err, stdout, stderr) => {
     if (stderr) {
-      console.log(stderr);
-      console.log('oops, looks like an error occurred in the packaging comand\nplease reach out to Nick for assistance');
+      log(stderr);
+      log(messages.packagingError);
       return;
     }
     if (err) {
-      console.log(err);
-      console.log('oops, looks like an error occurred in the packaging comand\nplease reach out to Nick for assistance');
+      log(err);
+      log(messages.packagingError);
       return;
     }
     if (stdout){
-      if( stdout.includes('__PACKAGEID__') ){
-        console.log('successfully uploaded new package version...');
-        let versionId = stdout.substring(stdout.indexOf('__PACKAGEID__')+13);
-        console.log('extracted id ==> '+versionId);
+      if( stdout.includes(messages.packageIdPhrase) ){
+        log(messages.successNewVersion);
+        let versionId = stdout.substring(stdout.indexOf(messages.packageIdPhrase)+messages.packageIdPhrase.length);
+        log(`${messages.installingNewVersion} ${versionId}`);
         callback(versionId);
       }else{
-        console.log(stdout);
-        console.log('<=== stdout package upload else ===>');
+        log(stdout);
+        log('<=== stdout package upload else ===>');
       }
     }
   });
 }
 
 export function doPackageInstall(command: string, callback: any){
-  console.log('package install command: '+command);
   exec(command, (err, stdout, stderr) => {
     if (stderr) {
-      if( stderr.includes('You cannot upgrade a beta package') ){
-        console.log('Please uninstall Sequence QA package and try again.')
+      if( stderr.includes(messages.betaUpgradeError) ){
+        log(messages.betaUpgradeHint);
         return;
       }
-      console.log('oops, error occurred while installing in QA :::');
-      console.log(stderr);
-      console.log('please reach out to Nick for assistance');
+      log(messages.installError);
+      log(stderr);
     }
     if (err) {
-      console.log(err);
-      if( err.includes('You cannot upgrade a beta package') ){
-        console.log('Please uninstall Sequence QA package and try again.')
+      log(err);
+      if( err.includes(messages.betaUpgradeError) ){
+        log(messages.betaUpgradeHint);
         return;
       }
-      console.log('oops, error occurred while installing in QA :::');
-      console.log(stderr);
-      console.log('please reach out to Nick for assistance');
+      log(messages.installError);
+      log(stderr);
     }
     if (stdout){
-      if( stdout.includes('Successfully') ){
-        console.log('successfully installed beta package in QA...');
+      if( stdout.includes('Success') || stdout.includes('success') ){
+        log(messages.successInstall);
         callback();
       }
     }
@@ -81,16 +89,16 @@ export function doAction(command: string){
   exec(command, (err, stdout, stderr) => {
     if (stderr) {
       if (stderr.includes("OAuth")) {
-        console.log(
+        log(
           "Please run sfdx force:config:set defaultusername=your_alias"
         );
       }else if(stderr.includes('No such file')){
-        console.log(stderr);
-        console.log('HINT: Please cd into the "src" dir of the git repo before using plugin');
-      }else console.log(stderr);
+        log(stderr);
+        log('HINT: Please cd into the "src" dir of the git repo before using plugin');
+      }else log(stderr);
     }
     if (stdout){
-      console.log(stdout);
+      log(stdout);
     }
   });
 }

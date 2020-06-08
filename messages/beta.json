@@ -1,7 +1,7 @@
 {
     "commandDescription": "command for beta package upload and installation into QA env",
     "packagingOrgDescription": "alias of the Guided Selling packaging org",
-    "validationMessage": "please provide the packaging org alias in the -u parameter",
+    "preValidateMessage": "please provide the packaging org alias in the -u parameter",
     "beginNewVersion": "creating new package version...",
     "installNewVersion": "installing new version in QA",
     "createTestData": "creating QA test data..."

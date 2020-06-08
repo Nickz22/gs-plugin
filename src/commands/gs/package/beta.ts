@@ -1,7 +1,7 @@
 import { flags, SfdxCommand } from "@salesforce/command";
 import { Messages } from "@salesforce/core";
 import { AnyJson } from "@salesforce/ts-types";
-import { doActionWithCallback, doPackageUpload, doPackageInstall, log } from "../../../Util/Util";
+import { doActionWithCallback, createNewVersion, doPackageInstall, log } from "../../../Util/Util";
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
@@ -14,8 +14,8 @@ export default class Beta extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   commands = {
-    validate: 'bash scripts/bash/validate.sh',
-    version: 'bash scripts/bash/createbeta.sh',
+    validate: 'bash scripts/bash/validateInput.sh',
+    version: 'bash scripts/bash/createBetaVersion.sh',
     install: 'bash scripts/bash/qaInstall.sh',
     initdata: 'bash scripts/bash/createTestData.sh'
   };
@@ -27,16 +27,17 @@ export default class Beta extends SfdxCommand {
     })
   };
   public async run(): Promise<AnyJson> {
+    if( this.flags.alias == undefined ){
+      log(messages.getMessage("preValidateMessage"));
+      return;
+    }
+
     const inputValidation = () => {
-      if( this.flags.alias == undefined ){
-        log(messages.getMessage("validationMessage"));
-        return;
-      }
       doActionWithCallback(`${this.commands.validate} ${this.flags.alias}`, createBetaVersion)
     }
     const createBetaVersion = () => {
       log(messages.getMessage("beginNewVersion"));
-      doPackageUpload(`${this.commands.version} ${this.flags.alias}`, installInQa);
+      createNewVersion(`${this.commands.version} ${this.flags.alias}`, installInQa);
     }
     const installInQa = (versionId : string) => {
       log(messages.getMessage("installNewVersion"));
