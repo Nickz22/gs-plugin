@@ -1,5 +1,4 @@
 const { exec } = require("child_process");
-const genericError : string = 'oops, looks like an error occurred while';
 const messages = {
   authError : "Please run sfdx force:config:set defaultusername=your_alias",
   dirError : 'HINT: Please cd into the "src" dir of the git repo before using plugin'

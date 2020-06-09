@@ -1,5 +1,5 @@
 {
-    "commandDescription": "command for beta package upload and installation into QA env",
+    "commandDescription": "command for managed package upload and installation into QA env",
     "packagingOrgDescription": "alias of the Guided Selling packaging org",
     "preValidateMessage": "please provide the packaging org alias in the -u parameter",
     "beginNewVersion": "creating new package version...",
