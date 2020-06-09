@@ -1,0 +1,6 @@
+{
+    "commandDescription": "executes your local 'scripts/apex/qa' path files - to change behavior, revise the local files.",
+    "orgAlias": "new scratch org alias",
+    "preValidateMessage": "please provide a value for the -u flag",
+    "startingMessage": "spinning up 21 day scratch org..."
+}

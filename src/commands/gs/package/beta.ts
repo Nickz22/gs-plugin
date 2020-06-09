@@ -1,7 +1,7 @@
 import { flags, SfdxCommand } from "@salesforce/command";
 import { Messages } from "@salesforce/core";
 import { AnyJson } from "@salesforce/ts-types";
-import { doActionWithCallback, createNewVersion, doPackageInstall, log } from "../../../Util/Util";
+import { doActionWithCallback, createNewVersion, log } from "../../../Util/Util";
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
@@ -33,20 +33,22 @@ export default class Beta extends SfdxCommand {
     }
 
     const inputValidation = () => {
-      doActionWithCallback(`${this.commands.validate} ${this.flags.alias}`, createBetaVersion)
+      doActionWithCallback(`${this.commands.validate} ${this.flags.alias}`, createBetaVersion);
     }
     const createBetaVersion = () => {
       log(messages.getMessage("beginNewVersion"));
-      createNewVersion(`${this.commands.version} ${this.flags.alias}`, installInQa);
+      log('installing in QA');
+      log('...then create test data');
+      createNewVersion(`${this.commands.version} ${this.flags.alias}`, () => {console.log('done installing in QA...')});
     }
-    const installInQa = (versionId : string) => {
-      log(messages.getMessage("installNewVersion"));
-      doPackageInstall(`${this.commands.install} ${versionId}`, createTestData);
-    }
-    const createTestData = () => {
-      log(messages.getMessage("createTestData"));
-      doActionWithCallback(this.commands.initdata, () => {return});
-    }
+    // const installInQa = (versionId : string) => {
+    //   log(messages.getMessage("installNewVersion"));
+    //   doPackageInstall(`${this.commands.install} ${versionId}`, createTestData);
+    // }
+    // const createTestData = () => {
+    //   log(messages.getMessage("createTestData"));
+    //   doActionWithCallback(this.commands.initdata, () => {return});
+    // }
 
     inputValidation();
     return "done";
