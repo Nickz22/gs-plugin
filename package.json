@@ -47,8 +47,8 @@
       "gs":{
         "description": "\nWelcome to the ringDNA Guided Selling sdfx plugin!\nThis plugin is a living toolset that we can customize to make our lives easier.\nRun --help on the topics below to familiarize yourself with current features."
       },
-      "gs:package": {
-          "description": "Commands for package creation and installation"
+      "gs:scratch": {
+          "description": "Commands for initializing your scratch org"
         },
         "gs:helper": {
           "description": "Commands to manipulate data in your scratch org"
