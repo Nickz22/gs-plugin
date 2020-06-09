@@ -52,6 +52,9 @@
         },
         "gs:helper": {
           "description": "Commands to manipulate data in your scratch org"
+        },
+        "gs:package": {
+          "description": "Commands for managed package release. Please do not use."
         }
     },
     "devPlugins": [
