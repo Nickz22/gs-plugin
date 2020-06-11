@@ -40,4 +40,5 @@ This command works with [local .apex files in the Sequence repository](https://g
   
   
   **Note** 
+  
   You shouldn't have to worry about other developers overwriting your .apex files since the scripts/apex/data directory is in [.gitignore](https://github.com/ringdna/sequence/blob/48f3aa22143ace7be66170fc2d8145d59c90d7fb/src/.gitignore#L47).
