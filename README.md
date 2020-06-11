@@ -1,7 +1,7 @@
-helper
+Guided Selling Helper
 ======
 
-The Guided Selling sfdx plugin contains utility commands to make development easier. It can do things like initialize your scratch org, create bulk data or delete data (in your scratch org).
+This Guided Selling sfdx plugin contains utility commands to make development easier. It can do things like initialize your scratch org, create bulk data or delete data (in your scratch org).
 
 # Installation
 1. [Install Salesforce Cli](https://developer.salesforce.com/tools/sfdxcli)
