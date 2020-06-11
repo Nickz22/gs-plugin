@@ -57,10 +57,10 @@ You can add new commands to an existing or new namespace. For example, you can a
   * discard your .gitignore changes
 ### Add new plugin namespace
 1. Add a new directory within `commands/gs` whose name matches your intended namespace.
-2. Follow above steps to add a command to the namespace.
+2. Follow [the above steps](https://github.com/Nickz22/gs-plugin/blob/master/README.md#add-new-command-to-existing-namespace) to add a command to the namespace.
  
  ### Notes
  
 1. You shouldn't have to worry about other developers overwriting your .apex files since the scripts/apex/data directory is in [.gitignore](https://github.com/ringdna/sequence/blob/48f3aa22143ace7be66170fc2d8145d59c90d7fb/src/.gitignore#L47).
-
+2. To use commands you've just added, you'll need to run `sfdx plugins:link` to update the sfdx-namespaced plugin references.
  
