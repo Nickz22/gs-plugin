@@ -1,7 +1,7 @@
 import { flags, SfdxCommand } from "@salesforce/command";
 import { Messages } from "@salesforce/core";
 import { AnyJson } from "@salesforce/ts-types";
-import { doAction } from "../../../Util/Util";
+import { doActionWithCallback, doAction } from "../../../Util/Util";
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
@@ -10,7 +10,7 @@ Messages.importMessagesDirectory(__dirname);
 // or any library that is using the messages framework can also be loaded this way.
 const messages = Messages.loadMessages("helper", "insertData");
 
-export default class Data extends SfdxCommand {
+export default class Insert extends SfdxCommand {
   public static description = messages.getMessage("commandDescription");
 
   protected static flagsConfig = {
@@ -32,7 +32,9 @@ export default class Data extends SfdxCommand {
         break;
       case "lead":
       case "l":
-        doAction(`${command}/leads.apex`);
+        doActionWithCallback(`${command}/leads.apex`, () => {
+          console.log("done");
+        });
         break;
     }
     return "done";

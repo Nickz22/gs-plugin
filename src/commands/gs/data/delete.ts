@@ -10,7 +10,7 @@ Messages.importMessagesDirectory(__dirname);
 // or any library that is using the messages framework can also be loaded this way.
 const messages = Messages.loadMessages("helper", "deleteData");
 
-export default class Data extends SfdxCommand {
+export default class Delete extends SfdxCommand {
   public static description = messages.getMessage("commandDescription");
 
   protected static flagsConfig = {

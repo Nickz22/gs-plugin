@@ -1,48 +1,50 @@
 const { exec } = require("child_process");
 const messages = {
-  authError : "Please run sfdx force:config:set defaultusername=your_alias",
-  dirError : 'HINT: Please cd into the "src" dir of the git repo before using plugin'
-}
+  authError: "Please run sfdx force:config:set defaultusername=your_alias",
+  dirError:
+    'HINT: Please cd into the "src" dir of the git repo before using plugin',
+};
 
-export function doAction(command: string){
+export function doAction(command: string) {
   exec(command, (err, stdout, stderr) => {
     if (stderr) {
       if (stderr.includes("OAuth")) {
         log(messages.authError);
-      }else if(stderr.includes('No such file')){
+      } else if (stderr.includes("No such file")) {
         log(stderr);
         log(messages.dirError);
-      }else{
+      } else {
         log(stderr);
-      } 
+      }
     }
-    if(stdout){
+    if (stdout) {
       log(stdout);
     }
   });
 }
 
 export async function doActionWithCallback(command: string, callback: any) {
-  let success : boolean = true;
+  console.log("running");
+  let success: boolean = true;
   await exec(command, (err, stdout, stderr) => {
-    if (err){
+    if (err) {
       success = false;
       log(err);
       log("ERROR");
       return success;
     }
-    if (stdout){
-      if(stdout != null && stdout.length > 0){
+    if (stdout) {
+      if (stdout != null && stdout.length > 0) {
         log(stdout);
         callback();
-      }else{
-        log('empty std out...');  
+      } else {
+        log("empty std out...");
       }
     }
   });
   return success;
 }
 
-export function log(output: any){
+export function log(output: any) {
   console.log(output);
 }
