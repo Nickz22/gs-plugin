@@ -37,9 +37,10 @@ This command works with [local .apex files in the Sequence repository](https://g
   * if flag is "contact" or "c", executes [src/scripts/apex/data/delete/contacts.apex](https://github.com/ringdna/sequence/blob/Sequence-QA/src/scripts/apex/data/delete/contacts.apex)
 4. `sfdx gs:helper:data:bulk -o (lead | l )`
   * if flag is "lead" or "l", executes [src/scripts/apex/data/bulk/leads.apex](https://github.com/ringdna/sequence/blob/Sequence-QA/src/scripts/apex/data/bulk/leads.apex)
+ 
+ ### Notes
+ 
+1. You shouldn't have to worry about other developers overwriting your .apex files since the scripts/apex/data directory is in [.gitignore](https://github.com/ringdna/sequence/blob/48f3aa22143ace7be66170fc2d8145d59c90d7fb/src/.gitignore#L47).
+
   
   
-  
-  *******Note** 
-  
-  You shouldn't have to worry about other developers overwriting your .apex files since the scripts/apex/data directory is in [.gitignore](https://github.com/ringdna/sequence/blob/48f3aa22143ace7be66170fc2d8145d59c90d7fb/src/.gitignore#L47).
