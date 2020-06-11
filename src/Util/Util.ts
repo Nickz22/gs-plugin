@@ -22,6 +22,27 @@ export function doAction(command: string){
   });
 }
 
+export async function doActionWithCallback(command: string, callback: any) {
+  let success : boolean = true;
+  await exec(command, (err, stdout, stderr) => {
+    if (err){
+      success = false;
+      log(err);
+      log("ERROR");
+      return success;
+    }
+    if (stdout){
+      if(stdout != null && stdout.length > 0){
+        log(stdout);
+        callback();
+      }else{
+        log('empty std out...');  
+      }
+    }
+  });
+  return success;
+}
+
 export function log(output: any){
   console.log(output);
 }

@@ -1,0 +1,4 @@
+{
+  "commandDescription": "executes your local 'scripts/apex/data/delete' path files - to change behavior, revise the local files.",
+  "objectFlagDescription": "Lead | lead | l \n Contact | contact | c \n ocr | opportunitycontactrole"
+}

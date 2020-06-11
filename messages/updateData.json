@@ -1,0 +1,4 @@
+{
+  "commandDescription": "executes your local 'scripts/apex/data/update' path files - to change behavior, revise those files.",
+  "objectFlagDescription": "Lead | lead | l \n Contact | contact | c \n ocr | opportunitycontactrole"
+}

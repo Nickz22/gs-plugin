@@ -1,0 +1,6 @@
+{
+  "commandDescription": "executes your local 'scripts/apex/data/bulk' path files - to change behavior, revise those files.",
+  "objectFlagDescription": "Lead | lead | l \n Contact | contact | c \n ocr | opportunitycontactrole",
+  "noContactCommand": "no bulk actions available for the contact object",
+  "noOcrCommand": "no bulk actions available for the ocr object"
+}
