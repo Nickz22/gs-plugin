@@ -13,6 +13,7 @@ This Guided Selling sfdx plugin contains utility commands to make development ea
   * `sfdx gs --help`
   
 # Commands
+After completing the installation steps, you should be able to execute the following commands from your development sfdx project.
 ## sfdx gs:scratch:start -a {org_alias}
 This command does the following: 
 1. Initializes a scratch org.
