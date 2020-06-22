@@ -1,7 +1,7 @@
 import { flags, SfdxCommand } from "@salesforce/command";
 import { Messages } from "@salesforce/core";
 import { AnyJson } from "@salesforce/ts-types";
-import { doAction } from "../../../Util/Util";
+import { doAction, doActionWithCallback } from "../../../Util/Util";
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
@@ -14,7 +14,7 @@ export default class Delete extends SfdxCommand {
   public static description = messages.getMessage("commandDescription");
 
   protected static flagsConfig = {
-    operation: flags.string({
+    object: flags.string({
       char: "o",
       description: messages.getMessage("objectFlagDescription"),
     }),
@@ -24,15 +24,21 @@ export default class Delete extends SfdxCommand {
     switch (this.flags.object) {
       case "contact":
       case "c":
-        doAction(`${command}/contacts.apex`);
+        doActionWithCallback(`${command}/contacts.apex`, () => {
+          return;
+        });
         break;
       case "ocr":
       case "opportunitycontactrole":
-        doAction(`${command}/ocrs.apex`);
+        doActionWithCallback(`${command}/ocrs.apex`, () => {
+          return;
+        });
         break;
       case "lead":
       case "l":
-        doAction(`${command}/leads.apex`);
+        doActionWithCallback(`${command}/contacts.apex`, () => {
+          return;
+        });
         break;
     }
     return "done";

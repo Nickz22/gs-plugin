@@ -14,7 +14,7 @@ export default class Beta extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   commands = {
-    newRelease: 'sfdx force:package1:version:create -u pkgOrg -m  --name RDNACadence --packageid 0336F000000B3Oh'
+    newRelease: 'sfdx force:package1:version:create -u pkgOrg -m  --name GuidedSelling --packageid 0336F000000B3Oh'
   };
   public async run(): Promise<AnyJson> {
     doAction(this.commands.newRelease);

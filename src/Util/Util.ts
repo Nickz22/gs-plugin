@@ -24,7 +24,6 @@ export function doAction(command: string) {
 }
 
 export async function doActionWithCallback(command: string, callback: any) {
-  console.log("running");
   let success: boolean = true;
   await exec(command, (err, stdout, stderr) => {
     if (err) {

@@ -14,7 +14,7 @@ export default class Insert extends SfdxCommand {
   public static description = messages.getMessage("commandDescription");
 
   protected static flagsConfig = {
-    operation: flags.string({
+    object: flags.string({
       char: "o",
       description: messages.getMessage("objectFlagDescription"),
     }),
@@ -24,16 +24,20 @@ export default class Insert extends SfdxCommand {
     switch (this.flags.object) {
       case "contact":
       case "c":
-        doAction(`${command}/contacts.apex`);
+        doActionWithCallback(`${command}/contacts.apex`, () => {
+          return;
+        });
         break;
       case "ocr":
       case "opportunitycontactrole":
-        doAction(`${command}/ocrs.apex`);
+        doActionWithCallback(`${command}/ocrs.apex`, () => {
+          return;
+        });
         break;
       case "lead":
       case "l":
         doActionWithCallback(`${command}/leads.apex`, () => {
-          console.log("done");
+          return;
         });
         break;
     }
