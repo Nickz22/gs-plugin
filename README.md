@@ -1,94 +1,66 @@
-helper
+Guided Selling Helper
 ======
 
+This Guided Selling sfdx plugin contains utility commands to make development easier. It can do things like initialize your scratch org, create bulk data or delete data (in your scratch org).
 
-
-[![Version](https://img.shields.io/npm/v/helper.svg)](https://npmjs.org/package/helper)
-[![CircleCI](https://circleci.com/gh/Nickz22/helper/tree/master.svg?style=shield)](https://circleci.com/gh/Nickz22/helper/tree/master)
-[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/Nickz22/helper?branch=master&svg=true)](https://ci.appveyor.com/project/heroku/helper/branch/master)
-[![Codecov](https://codecov.io/gh/Nickz22/helper/branch/master/graph/badge.svg)](https://codecov.io/gh/Nickz22/helper)
-[![Greenkeeper](https://badges.greenkeeper.io/Nickz22/helper.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/Nickz22/helper/badge.svg)](https://snyk.io/test/github/Nickz22/helper)
-[![Downloads/week](https://img.shields.io/npm/dw/helper.svg)](https://npmjs.org/package/helper)
-[![License](https://img.shields.io/npm/l/helper.svg)](https://github.com/Nickz22/helper/blob/master/package.json)
-
-<!-- toc -->
-* [Debugging your plugin](#debugging-your-plugin)
-<!-- tocstop -->
-<!-- install -->
-<!-- usage -->
-```sh-session
-$ npm install -g helper
-$ sfdx COMMAND
-running command...
-$ sfdx (-v|--version|version)
-helper/0.0.0 darwin-x64 node-v12.16.3
-$ sfdx --help [COMMAND]
-USAGE
-  $ sfdx COMMAND
-...
-```
-<!-- usagestop -->
-<!-- commands -->
-* [`sfdx hello:org [-n <string>] [-f] [-v <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-helloorg--n-string--f--v-string--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
-
-## `sfdx hello:org [-n <string>] [-f] [-v <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
-
-print a greeting and your org IDs
-
-```
-USAGE
-  $ sfdx hello:org [-n <string>] [-f] [-v <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -f, --force                                                                       example boolean flag
-  -n, --name=name                                                                   name to print
-
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  -v, --targetdevhubusername=targetdevhubusername                                   username or alias for the dev hub
-                                                                                    org; overrides default dev hub org
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-EXAMPLES
-  $ sfdx hello:org --targetusername myOrg@example.com --targetdevhubusername devhub@org.com
-     Hello world! This is org: MyOrg and I will be around until Tue Mar 20 2018!
-     My hub org id is: 00Dxx000000001234
+# Installation
+1. [Install Salesforce Cli](https://developer.salesforce.com/tools/sfdxcli)
+2. Clone this repository
+  * `git clone https://github.com/Nickz22/gs-plugin.git`
+3. `cd` into the repository directory
+4. Run `sfdx plugins:link`
+5. Confirm successful installation by running:
+  * `sfdx gs --help`
   
-  $ sfdx hello:org --name myname --targetusername myOrg@example.com
-     Hello myname! This is org: MyOrg and I will be around until Tue Mar 20 2018!
-```
-<!-- commandsstop -->
-<!-- debugging-your-plugin -->
-# Debugging your plugin
-We recommend using the Visual Studio Code (VS Code) IDE for your plugin development. Included in the `.vscode` directory of this plugin is a `launch.json` config file, which allows you to attach a debugger to the node process when running your commands.
+# Commands
+After completing the installation steps, you should be able to execute the following commands from your development sfdx project.
+## sfdx gs:scratch:start -a {org_alias}
+This command does the following: 
+1. Initializes a scratch org.
+2. Installs the RingDNA for Salesforce package.
+3. Deploys Guided Selling source code to scratch org.
+4. Creates password for scratch org user.
+5. Assigns Sequence_Admin permission set to scratch org user.
+6. TO DO::: Updates Lead, Contact and Sequence Action page layouts.
 
-To debug the `hello:org` command: 
-1. Start the inspector
+## sfdx gs:helper:data:{operation} -o {object_name}
+This command works with [local .apex files in the Sequence repository](https://github.com/ringdna/sequence/tree/Sequence-QA/src/scripts/apex/data). Which .apex file gets executed depends on the command and flag you provide:
+1. `sfdx gs:helper:data:insert -o (lead | l | contact | c | opportunitycontactrole | ocr)`
+  * if flag is "lead" or "l", executes [src/scripts/apex/data/insert/leads.apex](https://github.com/ringdna/sequence/blob/Sequence-QA/src/scripts/apex/data/insert/leads.apex)
+  * if flag is "contact" or "c", executes [src/scripts/apex/data/insert/contacts.apex](https://github.com/ringdna/sequence/blob/Sequence-QA/src/scripts/apex/data/insert/contacts.apex)
+  * if flag is "opportunitycontactrole" or "ocr", executes [src/scripts/apex/data/insert/ocrs.apex](https://github.com/ringdna/sequence/blob/Sequence-QA/src/scripts/apex/data/insert/ocrs.apex)
+2. `sfdx gs:helper:data:update -o (lead | l | contact | c )`
+  * if flag is "lead" or "l", executes [src/scripts/apex/data/update/leads.apex](https://github.com/ringdna/sequence/blob/Sequence-QA/src/scripts/apex/data/update/leads.apex)
+  * if flag is "contact" or "c", executes [src/scripts/apex/data/update/contacts.apex](https://github.com/ringdna/sequence/blob/Sequence-QA/src/scripts/apex/data/update/contacts.apex)
+3. `sfdx gs:helper:data:delete -o (lead | l | contact | c )`
+  * if flag is "lead" or "l", executes [src/scripts/apex/data/delete/leads.apex](https://github.com/ringdna/sequence/blob/Sequence-QA/src/scripts/apex/data/delete/leads.apex)
+  * if flag is "contact" or "c", executes [src/scripts/apex/data/delete/contacts.apex](https://github.com/ringdna/sequence/blob/Sequence-QA/src/scripts/apex/data/delete/contacts.apex)
+4. `sfdx gs:helper:data:bulk -o (lead | l )`
+  * if flag is "lead" or "l", executes [src/scripts/apex/data/bulk/leads.apex](https://github.com/ringdna/sequence/blob/Sequence-QA/src/scripts/apex/data/bulk/leads.apex)
   
-If you linked your plugin to the sfdx cli, call your command with the `dev-suspend` switch: 
-```sh-session
-$ sfdx hello:org -u myOrg@example.com --dev-suspend
-```
-  
-Alternatively, to call your command using the `bin/run` script, set the `NODE_OPTIONS` environment variable to `--inspect-brk` when starting the debugger:
-```sh-session
-$ NODE_OPTIONS=--inspect-brk bin/run hello:org -u myOrg@example.com
-```
-
-2. Set some breakpoints in your command code
-3. Click on the Debug icon in the Activity Bar on the side of VS Code to open up the Debug view.
-4. In the upper left hand corner of VS Code, verify that the "Attach to Remote" launch configuration has been chosen.
-5. Hit the green play button to the left of the "Attach to Remote" launch configuration window. The debugger should now be suspended on the first line of the program. 
-6. Hit the green play button at the top middle of VS Code (this play button will be to the right of the play button that you clicked in step #5).
-<br><img src=".images/vscodeScreenshot.png" width="480" height="278"><br>
-Congrats, you are debugging!
+## Contributing
+You can add new commands to an existing or new namespace. For example, you can add a "user" namespace to the "gs" namespace (gs:user), or add a new command to the existing "gs:data" namespace.
+### Add new command to existing namespace
+1. Create new .ts file under the directory matching the namespace.
+  * If you want your new "explode" command to live under the "data" namespace, you'll add `explode.ts` within the `src/commands/gs/data` directory
+2. Add a new .json file to the `messages` top level directory.
+  * Name doesn't matter but it's best to keep it similar to the .ts file name.
+3. Copy the typescript from some other command like `src/commands/gs/data/insert.ts` to get the necessary boilerplate.
+4. Edit`const messages = Messages.loadMessages("helper", "updateData");` so that the second parameter to `Messages.getMessages()` matches the name of your new .json file from (2)
+5. Add or change the name of the existing `protected static flagsConfig` property to the desired character and description of your command flag(s).
+6. To execute an apex script, use `doActionWithCallback()` to execute `sfdx force:apex:execute -f {path_to_apex_script}`, and then execute some function callback.
+  * Any apex scripts for this plugin should be placed in the [src/scripts/apex/data/](https://github.com/ringdna/sequence/tree/Sequence-QA/src/scripts/apex/data) directory and follow the same directory structure as existing commands
+7. To commit your new .apex file:
+  * Temporarily comment out  `scripts/apex/data/` in [.gitignore](https://github.com/ringdna/sequence/blob/48f3aa22143ace7be66170fc2d8145d59c90d7fb/src/.gitignore#L47)
+  * commit your .apex files
+  * push to remote
+  * discard your .gitignore changes
+### Add new plugin namespace
+1. Add a new directory within `commands/gs` whose name matches your intended namespace.
+2. Follow [the above steps](https://github.com/Nickz22/gs-plugin/blob/master/README.md#add-new-command-to-existing-namespace) to add a command to the namespace.
+ 
+ ### Notes
+ 
+1. You shouldn't have to worry about other developers overwriting your .apex files since the scripts/apex/data directory is in [.gitignore](https://github.com/ringdna/sequence/blob/48f3aa22143ace7be66170fc2d8145d59c90d7fb/src/.gitignore#L47).
+2. To use commands you've just added, you'll need to run `sfdx plugins:link` to update the sfdx-namespaced plugin references.
+ 
